@@ -1,0 +1,7 @@
+﻿mutation UpdatePerson($UpdatePersonInput:UpdatePersonInput!) {
+	updatePerson(input: $UpdatePersonInput) {
+		mutationResponse {
+			isSuccessful
+		}
+	}
+}

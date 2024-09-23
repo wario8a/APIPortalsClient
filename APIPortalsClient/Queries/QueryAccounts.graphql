@@ -1,0 +1,7 @@
+﻿query QueryAccounts {
+	accounts {
+		accountKey
+		website
+		sourceAccountCode
+	}
+}

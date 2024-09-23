@@ -1,0 +1,12 @@
+{
+  "schema": "schema.graphql",
+  "documents": "**/*.graphql",
+  "extensions": {
+    "strawberryShake": {
+      "name": "PortalsClient",
+      "url": "",
+      "namespace": "APIPortalsClient.GraphQL",
+      "dependencyInjection": true
+    }
+  }
+}

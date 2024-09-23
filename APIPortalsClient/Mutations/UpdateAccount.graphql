@@ -1,0 +1,7 @@
+﻿mutation UpdateAccounts ($UpdateAccountInput:UpdateAccountInput!){
+	updateAccount(input: $UpdateAccountInput) {
+		result {
+			isSuccess
+		}
+	}
+}

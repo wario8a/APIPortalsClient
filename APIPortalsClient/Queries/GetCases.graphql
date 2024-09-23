@@ -1,0 +1,7 @@
+﻿query QueryCases {
+	cases{
+		caseKey
+		caseCode
+		sourceCaseCode
+	}
+}

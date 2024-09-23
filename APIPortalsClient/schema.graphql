@@ -1,0 +1,624 @@
+schema {
+  query: BusinessQueries
+  mutation: BusinessMutations
+}
+
+type BusinessQueries {
+  accounts: [AccountQueryResponse!]!
+  accountByKey(accountKey: Int!): AccountQueryResponse!
+  cases: [CaseQueryResponse!]!
+  caseById(caseKey: Int!): CaseQueryResponse!
+  people: [PersonQueryResponse!]!
+  personById(personKey: Int!): PersonQueryResponse!
+  bodyParts: [BodyPartQueryResponse!]!
+  bodyPartById(key: Int!): BodyPartQueryResponse!
+  caseNotes: [CaseNoteQueryResponse!]!
+  caseNoteById(key: Int!): CaseNoteQueryResponse!
+  masterCases: [MasterCaseQueryResponse!]!
+  masterCaseById(key: Int!): MasterCaseQueryResponse!
+  serviceOrders: [ServiceOrderQueryResponse!]!
+  serviceOrderById(key: Int!): ServiceOrderQueryResponse!
+  serviceOrderAppointments: [ServiceOrderAppointmentQueryResponse!]!
+  serviceOrderAppointmentById(key: Int!): ServiceOrderAppointmentQueryResponse!
+  serviceOrderIncidents: [ServiceOrderIncidentQueryResponse!]!
+  serviceOrderIncidentById(key: Int!): ServiceOrderIncidentQueryResponse!
+  serviceOrderNotes: [ServiceOrderNoteQueryResponse!]!
+  serviceOrderNoteById(key: Int!): ServiceOrderNoteQueryResponse!
+  serviceOrderRelatedParties: [ServiceOrderRelatedPartyQueryResponse!]!
+  serviceOrderRelatedPartyNoteById(key: Int!): ServiceOrderRelatedPartyQueryResponse!
+}
+
+type BusinessMutations {
+  createAccount(input: CreateAccountInput!): CreateAccountPayload!
+  updateAccount(input: UpdateAccountInput!): UpdateAccountPayload!
+  createPerson(input: CreatePersonInput!): CreatePersonPayload!
+  updatePerson(input: UpdatePersonInput!): UpdatePersonPayload!
+  createCase(input: CreateCaseInput!): CreateCasePayload!
+  updateCase(input: UpdateCaseInput!): UpdateCasePayload!
+  createBodyPart(input: CreateBodyPartInput!): CreateBodyPartPayload!
+  updateBodyPart(input: UpdateBodyPartInput!): UpdateBodyPartPayload!
+  createCaseNote(input: CreateCaseNoteInput!): CreateCaseNotePayload!
+  updateCaseNote(input: UpdateCaseNoteInput!): UpdateCaseNotePayload!
+  createMasterCase(input: CreateMasterCaseInput!): CreateMasterCasePayload!
+  updateMasterCase(input: UpdateMasterCaseInput!): UpdateMasterCasePayload!
+  createServiceOrder(input: CreateServiceOrderInput!): CreateServiceOrderPayload!
+  updateServiceOrder(input: UpdateServiceOrderInput!): UpdateServiceOrderPayload!
+  createServiceOrderAilment(input: CreateServiceOrderAilmentInput!): CreateServiceOrderAilmentPayload!
+  updateServiceOrderAilment(input: UpdateServiceOrderAilmentInput!): UpdateServiceOrderAilmentPayload!
+  createServiceOrderAppointment(input: CreateServiceOrderAppointmentInput!): CreateServiceOrderAppointmentPayload!
+  updateServiceOrderAppointment(input: UpdateServiceOrderAppointmentInput!): UpdateServiceOrderAppointmentPayload!
+  createServiceOrderIncident(input: CreateServiceOrderIncidentInput!): CreateServiceOrderIncidentPayload!
+  updateServiceOrderIncident(input: UpdateServiceOrderIncidentInput!): UpdateServiceOrderIncidentPayload!
+  createServiceOrderNote(input: CreateServiceOrderNoteInput!): CreateServiceOrderNotePayload!
+  updateServiceOrderNote(input: UpdateServiceOrderNoteInput!): UpdateServiceOrderNotePayload!
+  createServiceOrderRelatedParty(input: CreateServiceOrderRelatedPartyInput!): CreateServiceOrderRelatedPartyPayload!
+  updateServiceOrderRelatedParty(input: UpdateServiceOrderRelatedPartyInput!): UpdateServiceOrderRelatedPartyPayload!
+}
+
+type CaseQueryResponse {
+  caseKey: Int!
+  caseCode: String
+  sourceCaseCode: String
+  statusKey: Int
+  caseTypeKey: Int
+  feeZoneKey: Int
+  officeKey: Int
+  jurisdictionKey: Int
+  employerKey: Int
+  claimantKey: Int
+  claimNumber: String
+}
+
+type AccountQueryResponse {
+  accountKey: Int!
+  accountCode: String
+  accountTypeKey: Int
+  parentKey: Int
+  sourceAccountCode: String
+  industrykey: Int
+  identifier: String
+  legalDesc: String
+  federalCode: String
+  accountDesc: String
+  website: String
+}
+
+type PersonQueryResponse {
+  personKey: Int!
+  personCode: String
+  personTypeKey: Int
+  ssn: String
+  crnCode: String
+  firstName: String
+  middleName: String
+  lastName: String
+  legalName: String
+  birthDate: DateTime
+  prefix: String
+  suffix: String
+  gender: String
+  jobTitle: String
+}
+
+type BodyPartQueryResponse {
+  bodyPartKey: Int!
+  sourceBodyPartEntity: String
+  sourceBodyPartKey: String
+  parentKey: Int
+  bodyPartDesc: String
+  bodyPartAnatomy: String
+  status: String
+  bodyPartFunctionality: String
+}
+
+type CaseNoteQueryResponse {
+  caseNoteKey: Int!
+  sourceCaseNoteEntity: String
+  caseKey: Int
+  sourceCaseKey: String
+  caseNoteTypeKey: Int
+  notes: String
+}
+
+type MasterCaseQueryResponse {
+  masterCaseKey: Int!
+  sourceMasterCaseEntity: String
+  caseKey: Int
+  sourceCaseKey: String
+  relatedCaseKey: Int
+  sourceRelatedCaseKey: String
+  relationTypeKey: Int
+  relationTypeKeyDesc: String
+}
+
+type ServiceOrderQueryResponse {
+  serviceOrderKey: Int!
+  caseKey: Int
+  serviceTypeKey: Int
+  clientKey: Int
+  billingClientKey: Int
+  sourceTypeKey: Int
+  referralKey: Int
+  sourceServiceOrderEntity: String
+  sourceServiceOrderKey: String
+  sourceCaseKey: String
+  sourceServiceTypeKey: String
+  language: String
+  priority: String
+  specialInstructions: String
+  policyNumber: String
+  ailmentText: String
+  reportResult: String
+  finalizedReportDate: DateTime
+  reportSentToClientDate: DateTime
+  isTransportRequired: Boolean
+  isTranslateRequired: Boolean
+  isMileageReimburstNeeded: Boolean
+  isPanel: Boolean
+}
+
+type ServiceOrderAppointmentQueryResponse {
+  serviceOrderApptKey: Int!
+  sourceServiceOrderAppointmentEntity: String
+  serviceOrderKey: Int
+  sourceServiceOrderKey: String
+  statusKey: Int
+  sourceStatusKey: String
+  tentativeDate: DateTime
+  startDate: DateTime
+  endDate: DateTime
+  duration: Decimal
+  locationMileage: Decimal
+  confirmationType: String
+  cancellationReason: String
+}
+
+type ServiceOrderIncidentQueryResponse {
+  serviceOrderIncidentKey: Int!
+  serviceOrderKey: Int
+  incidentDate: DateTime
+  stateCaseNumber: String
+  claimNumber: String
+}
+
+type ServiceOrderNoteQueryResponse {
+  serviceOrderNoteKey: Int!
+  sourceServiceOrderNoteEntity: String
+  serviceOrderKey: Int
+  sourceServiceOrderKey: String
+  serviceOrderNoteTypeKey: Int
+  notes: String
+}
+
+type ServiceOrderRelatedPartyQueryResponse {
+  serviceOrderRelatedPartyKey: Int!
+  sourceServiceOrderRelatedPartyEntity: String
+  serviceOrderKey: Int
+  sourceServiceOrderKey: String
+  serviceOrderRelatedPartyTypeKey: Int
+  personKey: Int
+  accountKey: Int
+  isDoNotContact: Boolean
+  personAccountType: Int
+}
+
+type CreationResponse {
+  key: Int!
+  isSuccessful: Boolean!
+}
+
+input CreateAccountInput {
+  accountCode: String
+  accountTypeKey: Int
+  parentKey: Int
+  sourceAccountCode: String
+  industrykey: Int
+  identifier: String
+  legalDesc: String
+  federalCode: String
+  accountDesc: String
+  website: String
+}
+
+type Result {
+  isSuccess: Boolean!
+  isFailure: Boolean!
+  error: Error!
+}
+
+input UpdateAccountInput {
+  accountKey: Int!
+  accountCode: String
+  accountTypeKey: Int
+  parentKey: Int
+  sourceAccountCode: String
+  industrykey: Int
+  identifier: String
+  legalDesc: String
+  federalCode: String
+  accountDesc: String
+  website: String
+}
+
+input CreatePersonInput {
+  personKey: Int!
+  personCode: String
+  personTypeKey: Int
+  ssn: String
+  crnCode: String
+  firstName: String
+  middleName: String
+  lastName: String
+  legalName: String
+  birthDate: DateTime
+  prefix: String
+  suffix: String
+  gender: String
+  jobTitle: String
+}
+
+type MutationResponse {
+  isSuccessful: Boolean!
+}
+
+input UpdatePersonInput {
+  personKey: Int!
+  personCode: String
+  personTypeKey: Int
+  ssn: String
+  crnCode: String
+  firstName: String
+  middleName: String
+  lastName: String
+  legalName: String
+  birthDate: DateTime
+  prefix: String
+  suffix: String
+  gender: String
+  jobTitle: String
+}
+
+input CreateCaseInput {
+  caseCode: String
+  sourceCaseCode: String
+  statusKey: Int
+  caseTypeKey: Int
+  feeZoneKey: Int
+  officeKey: Int
+  jurisdictionKey: Int
+  employerKey: Int
+  claimantKey: Int
+  claimNumber: String
+}
+
+input UpdateCaseInput {
+  caseKey: Int!
+  caseCode: String
+  sourceCaseCode: String
+  statusKey: Int
+  caseTypeKey: Int
+  feeZoneKey: Int
+  officeKey: Int
+  jurisdictionKey: Int
+  employerKey: Int
+  claimantKey: Int
+  claimNumber: String
+}
+
+input CreateBodyPartInput {
+  sourceBodyPartEntity: String
+  sourceBodyPartKey: String
+  parentKey: Int
+  bodyPartDesc: String
+  bodyPartAnatomy: String
+  status: String
+  bodyPartFunctionality: String
+}
+
+input UpdateBodyPartInput {
+  bodyPartKey: Int!
+  sourceBodyPartEntity: String
+  sourceBodyPartKey: String
+  parentKey: Int
+  bodyPartDesc: String
+  bodyPartAnatomy: String
+  status: String
+  bodyPartFunctionality: String
+}
+
+input CreateCaseNoteInput {
+  sourceCaseNoteEntity: String
+  caseKey: Int
+  sourceCaseKey: String
+  caseNoteTypeKey: Int
+  notes: String
+}
+
+input UpdateCaseNoteInput {
+  caseNoteKey: Int!
+  sourceCaseNoteEntity: String
+  caseKey: Int
+  sourceCaseKey: String
+  caseNoteTypeKey: Int
+  notes: String
+}
+
+input CreateMasterCaseInput {
+  sourceMasterCaseEntity: String
+  caseKey: Int
+  sourceCaseKey: String
+  relatedCaseKey: Int
+  sourceRelatedCaseKey: String
+  relationTypeKey: Int
+  relationTypeKeyDesc: String
+}
+
+input UpdateMasterCaseInput {
+  masterCaseKey: Int!
+  sourceMasterCaseEntity: String
+  caseKey: Int
+  sourceCaseKey: String
+  relatedCaseKey: Int
+  sourceRelatedCaseKey: String
+  relationTypeKey: Int
+  relationTypeKeyDesc: String
+}
+
+input CreateServiceOrderInput {
+  caseKey: Int
+  serviceTypeKey: Int
+  clientKey: Int
+  billingClientKey: Int
+  sourceTypeKey: Int
+  referralKey: Int
+  sourceServiceOrderEntity: String
+  sourceServiceOrderKey: String
+  sourceCaseKey: String
+  sourceServiceTypeKey: String
+  language: String
+  priority: String
+  specialInstructions: String
+  policyNumber: String
+  ailmentText: String
+  reportResult: String
+  finalizedReportDate: DateTime
+  reportSentToClientDate: DateTime
+  isTransportRequired: Boolean
+  isTranslateRequired: Boolean
+  isMileageReimburstNeeded: Boolean
+  isPanel: Boolean
+}
+
+input UpdateServiceOrderInput {
+  serviceOrderKey: Int!
+  caseKey: Int
+  serviceTypeKey: Int
+  clientKey: Int
+  billingClientKey: Int
+  sourceTypeKey: Int
+  referralKey: Int
+  sourceServiceOrderEntity: String
+  sourceServiceOrderKey: String
+  sourceCaseKey: String
+  sourceServiceTypeKey: String
+  language: String
+  priority: String
+  specialInstructions: String
+  policyNumber: String
+  ailmentText: String
+  reportResult: String
+  finalizedReportDate: DateTime
+  reportSentToClientDate: DateTime
+  isTransportRequired: Boolean
+  isTranslateRequired: Boolean
+  isMileageReimburstNeeded: Boolean
+  isPanel: Boolean
+}
+
+input CreateServiceOrderAilmentInput {
+  bodyPartKey: Int
+  serviceOrderKey: Int
+  impairmentRating: Int
+  ailmentText: String
+}
+
+input UpdateServiceOrderAilmentInput {
+  serviceOrderAilmentKey: Int!
+  bodyPartKey: Int
+  serviceOrderKey: Int
+  impairmentRating: Int
+  ailmentText: String
+}
+
+input CreateServiceOrderAppointmentInput {
+  sourceServiceOrderAppointmentEntity: String
+  serviceOrderKey: Int
+  sourceServiceOrderKey: String
+  statusKey: Int
+  sourceStatusKey: String
+  tentativeDate: DateTime
+  startDate: DateTime
+  endDate: DateTime
+  duration: Decimal
+  locationMileage: Decimal
+  confirmationType: String
+  cancellationReason: String
+}
+
+input UpdateServiceOrderAppointmentInput {
+  serviceOrderApptKey: Int!
+  sourceServiceOrderAppointmentEntity: String
+  serviceOrderKey: Int
+  sourceServiceOrderKey: String
+  statusKey: Int
+  sourceStatusKey: String
+  tentativeDate: DateTime
+  startDate: DateTime
+  endDate: DateTime
+  duration: Decimal
+  locationMileage: Decimal
+  confirmationType: String
+  cancellationReason: String
+}
+
+input CreateServiceOrderIncidentInput {
+  serviceOrderKey: Int
+  incidentDate: DateTime
+  stateCaseNumber: String
+  claimNumber: String
+}
+
+input UpdateServiceOrderIncidentInput {
+  serviceOrderIncidentKey: Int!
+  serviceOrderKey: Int
+  incidentDate: DateTime
+  stateCaseNumber: String
+  claimNumber: String
+}
+
+input CreateServiceOrderNoteInput {
+  sourceServiceOrderNoteEntity: String
+  serviceOrderKey: Int
+  sourceServiceOrderKey: String
+  serviceOrderNoteTypeKey: Int
+  notes: String
+}
+
+input UpdateServiceOrderNoteInput {
+  serviceOrderNoteKey: Int!
+  sourceServiceOrderNoteEntity: String
+  serviceOrderKey: Int
+  sourceServiceOrderKey: String
+  serviceOrderNoteTypeKey: Int
+  notes: String
+}
+
+input CreateServiceOrderRelatedPartyInput {
+  sourceServiceOrderRelatedPartyEntity: String
+  serviceOrderKey: Int
+  sourceServiceOrderKey: String
+  serviceOrderRelatedPartyTypeKey: Int
+  personKey: Int
+  accountKey: Int
+  isDoNotContact: Boolean
+  personAccountType: Int
+}
+
+input UpdateServiceOrderRelatedPartyInput {
+  serviceOrderRelatedPartyKey: Int!
+  sourceServiceOrderRelatedPartyEntity: String
+  serviceOrderKey: Int
+  sourceServiceOrderKey: String
+  serviceOrderRelatedPartyTypeKey: Int
+  personKey: Int
+  accountKey: Int
+  isDoNotContact: Boolean
+  personAccountType: Int
+}
+
+"The built-in `Decimal` scalar type."
+scalar Decimal
+
+"The `DateTime` scalar represents an ISO-8601 compliant date time type."
+scalar DateTime
+
+type Error {
+  code: String!
+  name: String!
+}
+
+type CreateAccountPayload {
+  creationResponse: CreationResponse
+}
+
+type UpdateAccountPayload {
+  result: Result
+}
+
+type CreatePersonPayload {
+  creationResponse: CreationResponse
+}
+
+type UpdatePersonPayload {
+  mutationResponse: MutationResponse
+}
+
+type CreateCasePayload {
+  creationResponse: CreationResponse
+}
+
+type UpdateCasePayload {
+  mutationResponse: MutationResponse
+}
+
+type CreateBodyPartPayload {
+  creationResponse: CreationResponse
+}
+
+type UpdateBodyPartPayload {
+  mutationResponse: MutationResponse
+}
+
+type CreateCaseNotePayload {
+  creationResponse: CreationResponse
+}
+
+type UpdateCaseNotePayload {
+  mutationResponse: MutationResponse
+}
+
+type CreateMasterCasePayload {
+  creationResponse: CreationResponse
+}
+
+type UpdateMasterCasePayload {
+  mutationResponse: MutationResponse
+}
+
+type CreateServiceOrderPayload {
+  creationResponse: CreationResponse
+}
+
+type UpdateServiceOrderPayload {
+  mutationResponse: MutationResponse
+}
+
+type CreateServiceOrderAilmentPayload {
+  creationResponse: CreationResponse
+}
+
+type UpdateServiceOrderAilmentPayload {
+  mutationResponse: MutationResponse
+}
+
+type CreateServiceOrderAppointmentPayload {
+  creationResponse: CreationResponse
+}
+
+type UpdateServiceOrderAppointmentPayload {
+  mutationResponse: MutationResponse
+}
+
+type CreateServiceOrderIncidentPayload {
+  creationResponse: CreationResponse
+}
+
+type UpdateServiceOrderIncidentPayload {
+  mutationResponse: MutationResponse
+}
+
+type CreateServiceOrderNotePayload {
+  creationResponse: CreationResponse
+}
+
+type UpdateServiceOrderNotePayload {
+  mutationResponse: MutationResponse
+}
+
+type CreateServiceOrderRelatedPartyPayload {
+  creationResponse: CreationResponse
+}
+
+type UpdateServiceOrderRelatedPartyPayload {
+  mutationResponse: MutationResponse
+}

@@ -1,0 +1,7 @@
+﻿query GetCaseById($caseKey: Int!){
+	caseById(caseKey: $caseKey) {
+		caseCode
+		officeKey
+		sourceCaseCode
+	}
+}
